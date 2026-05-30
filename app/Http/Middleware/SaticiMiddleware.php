@@ -15,6 +15,10 @@ class SaticiMiddleware
             abort(403, 'Bu sayfaya erişim yetkiniz yok.');
         }
 
+        if (Auth::user()->durum !== 'aktif') {
+            abort(403, 'Hesabınız engellenmiştir.');
+        }
+
         $magaza = Magaza::where('kullanici_id', Auth::id())->first();
 
         if (!$magaza) {

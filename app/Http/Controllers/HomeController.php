@@ -10,7 +10,6 @@ use App\Models\Sss;
 use App\Models\IletisimMesaji;
 use App\Models\Yorum;
 use App\Models\User;
-use App\Models\Ayar;
 use App\Models\UrunSorusu;
 use App\Models\Banner;
 use App\Models\BlogYorum;
@@ -225,7 +224,7 @@ class HomeController extends Controller
             'mesaj' => 'required|string',
         ]);
 
-        IletisimMesaji::create($request->all());
+        IletisimMesaji::create($request->only(['ad_soyad', 'email', 'telefon', 'konu', 'mesaj']));
         return redirect()->route('contact')->with('success', 'Mesajınız başarıyla gönderildi.');
     }
 

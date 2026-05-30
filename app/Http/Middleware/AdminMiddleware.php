@@ -14,6 +14,10 @@ class AdminMiddleware
             abort(403, 'Bu sayfaya erişim yetkiniz yok.');
         }
 
+        if (Auth::user()->durum !== 'aktif') {
+            abort(403, 'Hesabınız engellenmiştir.');
+        }
+
         return $next($request);
     }
 }

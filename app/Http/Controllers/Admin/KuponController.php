@@ -26,7 +26,10 @@ class KuponController extends Controller
             'bitis_tarihi' => 'required|date|after:baslangic_tarihi',
         ]);
 
-        Kupon::create($request->all());
+        Kupon::create($request->only([
+            'kupon_kodu', 'indirim_turu', 'indirim_miktari',
+            'min_sepet_tutari', 'max_kullanim', 'baslangic_tarihi', 'bitis_tarihi',
+        ]));
 
         return redirect()->route('admin.kuponlar')->with('success', 'Kupon oluşturuldu.');
     }

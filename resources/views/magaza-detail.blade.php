@@ -147,11 +147,11 @@
 
 {{-- Gallery --}}
 @if($magaza->gorseller->count())
-@php $gorseller = $magaza->gorseller->values(); $gorsellerJson = json_encode($gorseller->toArray()); @endphp
+@php $gorseller = $magaza->gorseller->values()->map(fn($g) => ['dosya_yolu' => e($g->dosya_yolu), 'baslik' => e($g->baslik ?? ''), 'aciklama' => e($g->aciklama ?? '')]); @endphp
 <section class="relative py-12 md:py-16 overflow-hidden"
          style="background: linear-gradient(160deg, #fdf8ed 0%, #fcf6e8 30%, #fefcf7 60%, #f9edcc 100%);"
          x-data='{
-             items: {!! $gorsellerJson !!},
+              items: @json($gorseller),
              index: -1,
              get current() { return this.items[this.index] },
              get total() { return this.items.length },

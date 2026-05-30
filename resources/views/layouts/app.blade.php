@@ -281,8 +281,9 @@
                     </div>
                     <h3 class="text-2xl font-serif text-white font-semibold mb-2">{{ __('Fırsatları Kaçırma') }}</h3>
                     <p class="text-sm text-dark-500 mb-6">{{ __('Yeni ürünlerden, kampanyalardan ve özel indirimlerden haberdar ol.') }}</p>
-                    <form action="#" method="POST" class="flex gap-3 max-w-md mx-auto">
-                        <input type="email" placeholder="{{ __('E-posta adresiniz') }}" class="flex-1 bg-dark-800/50 border border-dark-700 rounded-lg px-4 py-3 text-sm text-white placeholder-dark-500 focus:border-gold-500 focus:ring-2 focus:ring-gold-500/10 transition">
+                    <form action="javascript:void(0)" method="POST" class="flex gap-3 max-w-md mx-auto" onsubmit="alert('Aboneliğiniz alınmıştır!');">
+                        @csrf
+                        <input type="email" placeholder="{{ __('E-posta adresiniz') }}" class="flex-1 bg-dark-800/50 border border-dark-700 rounded-lg px-4 py-3 text-sm text-white placeholder-dark-500 focus:border-gold-500 focus:ring-2 focus:ring-gold-500/10 transition" required>
                         <button type="submit" class="btn-gold shrink-0">{{ __('Abone Ol') }}</button>
                     </form>
                 </div>

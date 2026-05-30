@@ -52,7 +52,10 @@
                                 </div>
                             </form>
                             <p class="text-sm font-semibold text-dark-900 mt-2 font-serif">{{ number_format($item['fiyat'] * $item['adet'], 2) }} ₺</p>
-                            <a href="{{ route('cart.remove', $key) }}" class="text-xs text-red-500 hover:text-red-600 transition mt-1 inline-block font-sans"><i class="fas fa-trash mr-1"></i>Sil</a>
+                            <form action="{{ route('cart.remove', $key) }}" method="POST" class="inline">
+                                        @csrf @method('DELETE')
+                                        <button type="submit" class="text-xs text-red-500 hover:text-red-600 transition mt-1 font-sans"><i class="fas fa-trash mr-1"></i>Sil</button>
+                                    </form>
                         </div>
                     </div>
                 @endforeach

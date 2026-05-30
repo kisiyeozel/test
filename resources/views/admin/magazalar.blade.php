@@ -22,8 +22,8 @@
                         </td>
                         <td class="px-6 py-4">
                             @if($magaza->durum == 'beklemede')
-                                <a href="{{ route('admin.magaza-onayla', $magaza->id) }}" class="px-3 py-1 bg-green-500 text-white rounded text-xs hover:bg-green-600 mr-1">Onayla</a>
-                                <a href="{{ route('admin.magaza-reddet', $magaza->id) }}" class="px-3 py-1 bg-red-500 text-white rounded text-xs hover:bg-red-600">Reddet</a>
+                                <form action="{{ route('admin.magaza-onayla', $magaza->id) }}" method="POST" class="inline">@csrf @method('POST')<button type="submit" class="px-3 py-1 bg-green-500 text-white rounded text-xs hover:bg-green-600 mr-1">Onayla</button></form>
+                                <form action="{{ route('admin.magaza-reddet', $magaza->id) }}" method="POST" class="inline">@csrf @method('POST')<button type="submit" class="px-3 py-1 bg-red-500 text-white rounded text-xs hover:bg-red-600">Reddet</button></form>
                             @endif
                         </td>
                     </tr>

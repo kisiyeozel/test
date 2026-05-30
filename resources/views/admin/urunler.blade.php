@@ -35,10 +35,10 @@
                         <td class="px-6 py-4">
                             <div class="flex gap-2">
                                 @if($urun->durum != 'onaylandi')
-                                    <a href="{{ route('admin.urun-onayla', $urun->id) }}" class="px-3 py-1 bg-green-500 text-white rounded text-xs hover:bg-green-600">Onayla</a>
+                                    <form action="{{ route('admin.urun-onayla', $urun->id) }}" method="POST" class="inline">@csrf @method('POST')<button type="submit" class="px-3 py-1 bg-green-500 text-white rounded text-xs hover:bg-green-600">Onayla</button></form>
                                 @endif
                                 @if($urun->durum != 'reddedildi')
-                                    <a href="{{ route('admin.urun-reddet', $urun->id) }}" class="px-3 py-1 bg-red-500 text-white rounded text-xs hover:bg-red-600">Reddet</a>
+                                    <form action="{{ route('admin.urun-reddet', $urun->id) }}" method="POST" class="inline">@csrf @method('POST')<button type="submit" class="px-3 py-1 bg-red-500 text-white rounded text-xs hover:bg-red-600">Reddet</button></form>
                                 @endif
                             </div>
                         </td>

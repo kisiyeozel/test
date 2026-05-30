@@ -41,11 +41,12 @@
                         <td class="px-4 py-3 text-center">
                             <div class="flex items-center justify-center gap-2">
                                 @if(!$yorum->onaylandi_mi)
-                                    <a href="{{ route('admin.blog-yorum-onayla', $yorum->id) }}"
-                                       class="inline-flex items-center px-3 py-1.5 text-xs font-medium bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
-                                       onclick="return confirm('Yorum onaylansın mı?')">
-                                        <i class="fas fa-check mr-1"></i>Onayla
-                                    </a>
+                                    <form action="{{ route('admin.blog-yorum-onayla', $yorum->id) }}" method="POST" class="inline">
+                                        @csrf @method('POST')
+                                        <button type="submit" class="inline-flex items-center px-3 py-1.5 text-xs font-medium bg-green-500 text-white rounded-lg hover:bg-green-600 transition" onclick="return confirm('Yorum onaylansın mı?')">
+                                            <i class="fas fa-check mr-1"></i>Onayla
+                                        </button>
+                                    </form>
                                 @endif
                                 <form action="{{ route('admin.blog-yorum-sil', $yorum->id) }}" method="POST" onsubmit="return confirm('Yorum silinsin mi?')">
                                     @csrf @method('DELETE')

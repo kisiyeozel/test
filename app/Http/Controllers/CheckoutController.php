@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Siparis;
 use App\Models\SiparisUrun;
 use App\Models\Urun;
-use App\Models\UrunVaryant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;

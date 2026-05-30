@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siparis;
-use App\Models\SiparisUrun;
 use App\Services\PaytrService;
 use Illuminate\Http\Request;
 

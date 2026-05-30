@@ -66,10 +66,10 @@ Route::get('/arama-suggestions', [HomeController::class, 'searchSuggestions'])->
 
 Route::get('/sss', [HomeController::class, 'faq'])->name('faq');
 Route::get('/iletisim', [HomeController::class, 'contact'])->name('contact');
-Route::post('/iletisim', [HomeController::class, 'contactStore'])->name('contact.store');
+Route::post('/iletisim', [HomeController::class, 'contactStore'])->name('contact.store')->middleware('throttle:5,1');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [HomeController::class, 'blogDetay'])->name('blog.detail');
-Route::post('/blog/{slug}/yorum', [HomeController::class, 'blogYorumEkle'])->name('blog.yorum');
+Route::post('/blog/{slug}/yorum', [HomeController::class, 'blogYorumEkle'])->name('blog.yorum')->middleware('throttle:3,1');
 
 Route::get('/hakkimizda', [HomeController::class, 'hakkimizda'])->name('hakkimizda');
 Route::get('/kullanici-sozlesmesi', [HomeController::class, 'kullaniciSozlesmesi'])->name('kullanici-sozlesmesi');
@@ -77,12 +77,12 @@ Route::get('/mesafeli-satis', [HomeController::class, 'mesafeliSatis'])->name('m
 Route::get('/kvkk', [HomeController::class, 'kvkk'])->name('kvkk');
 
 Route::get('/satici-basvuru', [HomeController::class, 'saticiBasvuru'])->name('satici-basvuru');
-Route::post('/satici-basvuru', [HomeController::class, 'saticiBasvuruStore'])->name('satici-basvuru.store');
+Route::post('/satici-basvuru', [HomeController::class, 'saticiBasvuruStore'])->name('satici-basvuru.store')->middleware('throttle:3,1');
 
 Route::get('/sepet', [CartController::class, 'index'])->name('cart');
 Route::post('/sepet/ekle', [CartController::class, 'add'])->name('cart.add');
 Route::post('/sepet/guncelle', [CartController::class, 'update'])->name('cart.update');
-Route::get('/sepet/sil/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('/sepet/sil/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/odeme', [CheckoutController::class, 'index'])->name('checkout');
@@ -103,8 +103,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/favori/sil/{id}', [FavoriController::class, 'remove'])->name('favori.remove');
     Route::post('/favori/toggle/{urunId}', [FavoriController::class, 'toggle'])->name('favori.toggle');
 
-    Route::post('/yorum/ekle', [HomeController::class, 'yorumEkle'])->name('yorum.ekle');
-    Route::post('/urun/{id}/soru-sor', [HomeController::class, 'soruSor'])->name('urun.soru-sor');
+    Route::post('/yorum/ekle', [HomeController::class, 'yorumEkle'])->name('yorum.ekle')->middleware('throttle:3,1');
+    Route::post('/urun/{id}/soru-sor', [HomeController::class, 'soruSor'])->name('urun.soru-sor')->middleware('throttle:3,1');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -144,12 +144,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/kullanici/{id}/durum', [KullaniciController::class, 'durumGuncelle'])->name('kullanici-durum');
         Route::post('/kullanici/{id}/role', [KullaniciController::class, 'roleGuncelle'])->name('kullanici-role');
         Route::get('/urunler', [AdminUrunController::class, 'index'])->name('urunler');
-        Route::get('/urun/{id}/onayla', [AdminUrunController::class, 'onayla'])->name('urun-onayla');
-        Route::get('/urun/{id}/reddet', [AdminUrunController::class, 'reddet'])->name('urun-reddet');
+        Route::post('/urun/{id}/onayla', [AdminUrunController::class, 'onayla'])->name('urun-onayla');
+        Route::post('/urun/{id}/reddet', [AdminUrunController::class, 'reddet'])->name('urun-reddet');
         Route::delete('/urun/{id}', [AdminUrunController::class, 'destroy'])->name('urun-sil');
         Route::get('/magazalar', [AdminMagazaController::class, 'index'])->name('magazalar');
-        Route::get('/magaza/{id}/onayla', [AdminMagazaController::class, 'onayla'])->name('magaza-onayla');
-        Route::get('/magaza/{id}/reddet', [AdminMagazaController::class, 'reddet'])->name('magaza-reddet');
+        Route::post('/magaza/{id}/onayla', [AdminMagazaController::class, 'onayla'])->name('magaza-onayla');
+        Route::post('/magaza/{id}/reddet', [AdminMagazaController::class, 'reddet'])->name('magaza-reddet');
         Route::get('/siparisler', [AdminSiparisController::class, 'index'])->name('siparisler');
         Route::get('/siparis/{id}', [AdminSiparisController::class, 'detay'])->name('siparis-detay');
         Route::get('/kategoriler', [KategoriController::class, 'index'])->name('kategoriler');
@@ -162,7 +162,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/kupon-ekle', [KuponController::class, 'store'])->name('kupon-ekle');
         Route::delete('/kupon-sil/{id}', [KuponController::class, 'destroy'])->name('kupon-sil');
         Route::get('/yorumlar', [AdminYorumController::class, 'index'])->name('yorumlar');
-        Route::get('/yorum/{id}/onayla', [AdminYorumController::class, 'onayla'])->name('yorum-onayla');
+        Route::post('/yorum/{id}/onayla', [AdminYorumController::class, 'onayla'])->name('yorum-onayla');
         Route::delete('/yorum/{id}', [AdminYorumController::class, 'destroy'])->name('yorum-sil');
         Route::get('/blog', [AdminController::class, 'blog'])->name('blog');
         Route::post('/blog-ekle', [AdminController::class, 'blogEkle'])->name('blog-ekle');
@@ -180,7 +180,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/banner-guncelle/{id}', [BannerController::class, 'update'])->name('banner-guncelle');
         Route::delete('/banner-sil/{id}', [BannerController::class, 'destroy'])->name('banner-sil');
         Route::get('/blog-yorumlar', [AdminController::class, 'blogYorumlar'])->name('blog-yorumlar');
-        Route::get('/blog-yorum/{id}/onayla', [AdminController::class, 'blogYorumOnayla'])->name('blog-yorum-onayla');
+        Route::post('/blog-yorum/{id}/onayla', [AdminController::class, 'blogYorumOnayla'])->name('blog-yorum-onayla');
         Route::delete('/blog-yorum/{id}', [AdminController::class, 'blogYorumSil'])->name('blog-yorum-sil');
     });
 });

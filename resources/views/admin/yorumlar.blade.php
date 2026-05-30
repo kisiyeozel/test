@@ -23,7 +23,7 @@
                 </div>
                 <div class="flex gap-2 shrink-0">
                     @if($yorum->durum == 'beklemede')
-                        <a href="{{ route('admin.yorum-onayla', $yorum->id) }}" class="px-3 py-1 bg-green-500 text-white rounded text-xs hover:bg-green-600">Onayla</a>
+                        <form action="{{ route('admin.yorum-onayla', $yorum->id) }}" method="POST" class="inline">@csrf @method('POST')<button type="submit" class="px-3 py-1 bg-green-500 text-white rounded text-xs hover:bg-green-600">Onayla</button></form>
                     @endif
                     <form action="{{ route('admin.yorum-sil', $yorum->id) }}" method="POST" onsubmit="return confirm('Emin misiniz?')">
                         @csrf @method('DELETE')
