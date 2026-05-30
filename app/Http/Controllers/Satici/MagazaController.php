@@ -62,9 +62,9 @@ class MagazaController extends Controller
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('magaza', 'public');
         } else {
-            $data['logo'] = 'magaza-logo-' . Str::slug($request->magaza_adi) . '.svg';
+            $data['logo'] = 'magaza/magaza-logo-' . Str::slug($request->magaza_adi) . '.svg';
             $svgContent = file_get_contents(MagazaGorselService::getLogoUrl($request->magaza_adi));
-            Storage::disk('public')->put('magaza/' . $data['logo'], $svgContent);
+            Storage::disk('public')->put($data['logo'], $svgContent);
         }
 
         if ($request->hasFile('banner')) {
@@ -105,9 +105,9 @@ class MagazaController extends Controller
             if ($magaza->logo) Storage::disk('public')->delete($magaza->logo);
             $data['logo'] = $request->file('logo')->store('magaza', 'public');
         } elseif (!$magaza->logo || str_contains($magaza->logo, 'magaza-logo-')) {
-            $data['logo'] = 'magaza-logo-' . Str::slug($request->magaza_adi) . '.svg';
+            $data['logo'] = 'magaza/magaza-logo-' . Str::slug($request->magaza_adi) . '.svg';
             $svgContent = file_get_contents(MagazaGorselService::getLogoUrl($request->magaza_adi));
-            Storage::disk('public')->put('magaza/' . $data['logo'], $svgContent);
+            Storage::disk('public')->put($data['logo'], $svgContent);
         }
 
         if ($request->hasFile('banner')) {
@@ -165,7 +165,7 @@ class MagazaController extends Controller
                 $image = $resized;
             }
 
-            $tempPath = tempnam(sys_get_temp_dir(), 'galeri_') . '.' . $ext;
+            $tempPath = sys_get_temp_dir() . '/galeri_' . uniqid() . '.' . $ext;
             match ($ext) {
                 'png' => imagepng($image, $tempPath, 8),
                 'webp' => imagewebp($image, $tempPath, 80),

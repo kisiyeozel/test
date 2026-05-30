@@ -160,6 +160,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/ayarlar', [AyarController::class, 'update'])->name('ayarlar.update');
         Route::get('/kuponlar', [KuponController::class, 'index'])->name('kuponlar');
         Route::post('/kupon-ekle', [KuponController::class, 'store'])->name('kupon-ekle');
+        Route::get('/kupon-duzenle/{id}', [KuponController::class, 'edit'])->name('kupon-duzenle');
+        Route::post('/kupon-guncelle/{id}', [KuponController::class, 'update'])->name('kupon-guncelle');
         Route::delete('/kupon-sil/{id}', [KuponController::class, 'destroy'])->name('kupon-sil');
         Route::get('/yorumlar', [AdminYorumController::class, 'index'])->name('yorumlar');
         Route::post('/yorum/{id}/onayla', [AdminYorumController::class, 'onayla'])->name('yorum-onayla');

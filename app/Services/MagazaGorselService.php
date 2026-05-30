@@ -67,6 +67,6 @@ class MagazaGorselService
 
         file_put_contents($path, $svg);
 
-        return $filename;
+        return 'magaza-banner/' . $filename;
     }
 }

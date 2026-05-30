@@ -27,10 +27,13 @@
                         <span class="text-sm text-gray-500 ml-2">{{ $kupon->indirim_turu == 'yuzde' ? '%' . number_format($kupon->indirim_miktari, 0) : number_format($kupon->indirim_miktari, 2) . ' ₺' }}</span>
                         <span class="text-xs text-gray-400 block">{{ $kupon->kullanim_sayisi }}/{{ $kupon->max_kullanim ?: '∞' }} kullanım</span>
                     </div>
-                    <form action="{{ route('admin.kupon-sil', $kupon->id) }}" method="POST" onsubmit="return confirm('Emin misiniz?')">
-                        @csrf @method('DELETE')
-                        <button type="submit" class="text-red-500 hover:text-red-600"><i class="fas fa-trash"></i></button>
-                    </form>
+                    <div class="flex items-center gap-2">
+                        <a href="{{ route('admin.kupon-duzenle', $kupon->id) }}" class="text-blue-500 hover:text-blue-600"><i class="fas fa-edit"></i></a>
+                        <form action="{{ route('admin.kupon-sil', $kupon->id) }}" method="POST" onsubmit="return confirm('Emin misiniz?')">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:text-red-600"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </div>
                 </div>
             @endforeach
         </div>

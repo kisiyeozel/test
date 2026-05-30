@@ -77,4 +77,9 @@ class Urun extends Model
     {
         return $query->where('one_cikan', true);
     }
+
+    public function getYeniMiAttribute()
+    {
+        return $this->created_at && $this->created_at->diffInDays(now()) <= 7;
+    }
 }

@@ -245,7 +245,8 @@ if ($urun->yorum_sayisi > 0) {
         @forelse($urun->yorumlar->where('durum', 'onayli') as $yorum)
             <div class="border-b border-dark-100 pb-5 mb-5 last:border-0 last:pb-0 last:mb-0">
                 <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-3">
+                        @if($yorum->kullanici)
                         <div class="w-10 h-10 rounded-full overflow-hidden shrink-0{{ $yorum->kullanici->avatar ? '' : ' bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm' }}">
                             @if($yorum->kullanici->avatar)
                                 <img src="{{ asset('img/'.$yorum->kullanici->avatar) }}" alt="" class="w-full h-full object-cover">
@@ -254,7 +255,11 @@ if ($urun->yorum_sayisi > 0) {
                             @endif
                         </div>
                         <div><p class="font-medium text-dark-900">{{ $yorum->kullanici->ad_soyad ?? 'Anonim' }}</p><p class="text-xs text-dark-400">{{ $yorum->created_at->diffForHumans() }}</p></div>
-                    </div>
+                        @else
+                        <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-white font-semibold text-sm">?</div>
+                        <div><p class="font-medium text-dark-900">Anonim</p><p class="text-xs text-dark-400">{{ $yorum->created_at?->diffForHumans() ?? '' }}</p></div>
+                        @endif
+                        </div>
                     <div class="star-rating text-sm">
                         @for($i = 1; $i <= 5; $i++)
                             <i class="fas fa-star{{ $i <= $yorum->puan ? '' : '-o text-gray-200' }}"></i>

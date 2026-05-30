@@ -4,6 +4,6 @@ return [
     'merchant_id' => env('PAYTR_MERCHANT_ID'),
     'merchant_key' => env('PAYTR_MERCHANT_KEY'),
     'merchant_salt' => env('PAYTR_MERCHANT_SALT'),
-    'test_mode' => env('PAYTR_TEST_MODE', '1'),
+    'test_mode' => env('PAYTR_TEST_MODE', '0'),
     'ssl_verify' => env('PAYTR_SSL_VERIFY', true),
 ];
