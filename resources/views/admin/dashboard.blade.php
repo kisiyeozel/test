@@ -1,0 +1,18 @@
+@extends('layouts.admin') @section('title', 'Dashboard')
+@section('content')
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white rounded-xl border p-6"><div class="flex items-center justify-between"><div><p class="text-sm text-gray-500">Toplam Kullanıcı</p><p class="text-3xl font-bold text-gray-900 mt-1">{{ $data['toplamKullanici'] }}</p></div><div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600"><i class="fas fa-users text-xl"></i></div></div><p class="text-xs text-gray-400 mt-2">{{ $data['toplamSatici'] }} satıcı, {{ $data['toplamMusteri'] }} müşteri</p></div>
+    <div class="bg-white rounded-xl border p-6"><div class="flex items-center justify-between"><div><p class="text-sm text-gray-500">Toplam Ürün</p><p class="text-3xl font-bold text-gray-900 mt-1">{{ $data['toplamUrun'] }}</p></div><div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600"><i class="fas fa-box text-xl"></i></div></div><p class="text-xs text-gray-400 mt-2">{{ $data['bekleyenUrun'] }} onay bekliyor</p></div>
+    <div class="bg-white rounded-xl border p-6"><div class="flex items-center justify-between"><div><p class="text-sm text-gray-500">Mağazalar</p><p class="text-3xl font-bold text-gray-900 mt-1">{{ $data['onaylananMagaza'] }}</p></div><div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-green-600"><i class="fas fa-store text-xl"></i></div></div><p class="text-xs text-gray-400 mt-2">{{ $data['bekleyenMagaza'] }} onay bekliyor</p></div>
+    <div class="bg-white rounded-xl border p-6"><div class="flex items-center justify-between"><div><p class="text-sm text-gray-500">Toplam Ciro</p><p class="text-3xl font-bold text-gray-900 mt-1">{{ number_format($data['toplamCiro'], 0) }} ₺</p></div><div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600"><i class="fas fa-money-bill text-xl"></i></div></div><p class="text-xs text-gray-400 mt-2">{{ $data['toplamSiparis'] }} sipariş</p></div>
+</div>
+
+<div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-white rounded-xl border p-6"><h3 class="font-semibold text-gray-900 mb-4">Hızlı İşlemler</h3><div class="space-y-3">
+        <a href="{{ route('admin.urunler') }}" class="flex items-center justify-between p-3 bg-orange-50 rounded-lg hover:bg-orange-100 transition"><span class="text-sm font-medium text-gray-900"><i class="fas fa-box text-orange-500 mr-2"></i>Onay Bekleyen Ürünler</span><span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $data['bekleyenUrun'] }}</span></a>
+        <a href="{{ route('admin.magazalar') }}" class="flex items-center justify-between p-3 bg-green-50 rounded-lg hover:bg-green-100 transition"><span class="text-sm font-medium text-gray-900"><i class="fas fa-store text-green-500 mr-2"></i>Onay Bekleyen Mağazalar</span><span class="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $data['bekleyenMagaza'] }}</span></a>
+        <a href="{{ route('admin.mesajlar') }}" class="flex items-center justify-between p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition"><span class="text-sm font-medium text-gray-900"><i class="fas fa-envelope text-blue-500 mr-2"></i>Okunmamış Mesajlar</span><span class="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $data['okunmamisMesaj'] }}</span></a>
+    </div></div>
+    <div class="bg-white rounded-xl border p-6"><h3 class="font-semibold text-gray-900 mb-4">Son İşlemler</h3><p class="text-sm text-gray-500">Dashboard istatistikleri güncelleniyor...</p></div>
+</div>
+@endsection

@@ -1,0 +1,27 @@
+{
+    "name": "kisiyeozel.org",
+    "short_name": "Kisiyeozel",
+    "description": "Kişiye özel ürünlerin buluşma noktası – Her Ürün Size Özel.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fdf6ef",
+    "theme_color": "#b8860b",
+    "orientation": "portrait-primary",
+    "lang": "tr",
+    "icons": [
+        {
+            "src": "/img/icons-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/img/icons-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["shopping", "lifestyle"],
+    "prefer_related_applications": false
+}

@@ -2,48 +2,79 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    protected $table = 'kullanicilar';
+
+    const ROLE_ADMIN = 'admin';
+    const ROLE_SATICI = 'satici';
+    const ROLE_MUSTERI = 'musteri';
+
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'ad_soyad', 'email', 'telefon', 'sifre', 'avatar', 'durum', 'role',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
     protected $hidden = [
-        'password',
-        'remember_token',
+        'sifre', 'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function getAuthPassword()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->sifre;
+    }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isSatici()
+    {
+        return $this->role === self::ROLE_SATICI;
+    }
+
+    public function isMusteri()
+    {
+        return $this->role === self::ROLE_MUSTERI;
+    }
+
+    public function magaza()
+    {
+        return $this->hasOne(Magaza::class, 'kullanici_id');
+    }
+
+    public function siparisler()
+    {
+        return $this->hasMany(Siparis::class, 'kullanici_id');
+    }
+
+    public function urunler()
+    {
+        return $this->hasMany(Urun::class, 'kullanici_id');
+    }
+
+    public function favoriler()
+    {
+        return $this->hasMany(Favori::class, 'kullanici_id');
+    }
+
+    public function yorumlar()
+    {
+        return $this->hasMany(Yorum::class, 'kullanici_id');
     }
 }
