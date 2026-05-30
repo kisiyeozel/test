@@ -44,7 +44,7 @@
                     <div class="flex-1 min-w-0">
                         <p class="font-medium text-dark-900 truncate">{{ $item->urun_adi }}</p>
                         @if($item->kisisellestirme_bilgisi)
-                            @php $k = json_decode($item->kisisellestirme_bilgisi, true); @endphp
+                            @php $k = is_array($item->kisisellestirme_bilgisi) ? $item->kisisellestirme_bilgisi : json_decode($item->kisisellestirme_bilgisi, true); @endphp
                             <div class="text-xs text-dark-400 mt-0.5 space-y-0.5">
                                 @foreach($k as $key => $val)
                                     @if(!$val || $key == 'fotograf') @continue @endif

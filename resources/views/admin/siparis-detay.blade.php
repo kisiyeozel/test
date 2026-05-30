@@ -54,7 +54,11 @@
                                 <div>
                                     <p class="font-medium text-gray-900">{{ $item->urun_adi }}</p>
                                     @if($item->kisisellestirme_bilgisi)
-                                        <p class="text-xs text-gray-400 mt-0.5">{{ $item->kisisellestirme_bilgisi }}</p>
+                                        @php $k = is_array($item->kisisellestirme_bilgisi) ? $item->kisisellestirme_bilgisi : []; @endphp
+                                        @foreach($k as $key => $val)
+                                            @if(!$val || $key == 'fotograf') @continue @endif
+                                            <span class="text-xs text-gray-400">{{ ucfirst(str_replace('_', ' ', $key)) }}: {{ is_array($val) ? implode(', ', $val) : $val }}</span><br>
+                                        @endforeach
                                     @endif
                                 </div>
                             </div>

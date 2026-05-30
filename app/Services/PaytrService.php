@@ -19,7 +19,7 @@ class PaytrService
     {
         $userBasket = [];
         foreach ($data['basket'] as $item) {
-            $userBasket[] = [$item['ad'], $item['fiyat'], $item['adet']];
+            $userBasket[] = [$item['urun_adi'], $item['birim_fiyat'], $item['adet']];
         }
         $userBasketJson = json_encode($userBasket);
         $userBasket64 = base64_encode($userBasketJson);

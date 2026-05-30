@@ -329,6 +329,7 @@ class HomeController extends Controller
             'telefon' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:100',
             'sehir' => 'nullable|string|max:50',
+            'adres' => 'nullable|string',
             'website' => 'nullable|string|max:255',
             'aciklama' => 'nullable|string',
             'slogan' => 'nullable|string|max:200',
